@@ -1,0 +1,51 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="vindinium/HonoursBot.cs">
+    <Files>
+      <File FileName="vindinium/Client.cs" Line="16" Column="24" />
+      <File FileName="vindinium/ServerStuff.cs" Line="157" Column="30" />
+      <File FileName="vindinium/DataContracts.cs" Line="11" Column="6" />
+      <File FileName="vindinium/RandomBot.cs" Line="24" Column="35" />
+      <File FileName="vindinium/HonoursBot.cs" Line="35" Column="17" />
+      <File FileName="vindinium/Board.cs" Line="117" Column="30" />
+      <File FileName="HonoursBot/Board.cs" Line="40" Column="22" />
+      <File FileName="vindinium/Enums.cs" Line="25" Column="12" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="HonoursBot" expanded="True" />
+          <Node name="vindinium" expanded="True">
+            <Node name="HonoursBot.cs" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.vindinium>
+    <MonoDevelop.Ide.CustomExecutionModes>
+      <Data Name="Default (Custom)" Id="2e69d3e2-c357-4c03-abcd-7bb7fd02e7cd" ModeId="Default">
+        <CommandData>
+          <Item Key="MonoDevelop.Ide.Execution.CustomArgsCustomizer">
+            <Value Arguments="hqbz5r4b training 300" ctype="CustomArgsExecutionModeData">
+              <EnvironmentVariables />
+            </Value>
+          </Item>
+          <Item Key="MonoDevelop.Ide.Execution.MonoExecutionCustomizer">
+            <Value ctype="MonoExecutionParameters" />
+          </Item>
+        </CommandData>
+      </Data>
+    </MonoDevelop.Ide.CustomExecutionModes>
+  </MonoDevelop.Ide.ItemProperties.vindinium>
+</Properties>

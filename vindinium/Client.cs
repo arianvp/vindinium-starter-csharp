@@ -8,7 +8,7 @@ namespace vindinium
 {
     class Client
     {
-        /**
+        /**  hqbz5r4b
          * Launch client.
          * @param args args[0] Private key
          * @param args args[1] [training|arena]
@@ -21,10 +21,10 @@ namespace vindinium
 
             //create the server stuff, when not in training mode, it doesnt matter
             //what you use as the number of turns
-            ServerStuff serverStuff = new ServerStuff(args[0], args[1] != "arena", uint.Parse(args[2]), serverURL, null);
+            ServerStuff serverStuff = new ServerStuff("hqbz5r4b", true, 300, serverURL, null);
 
             //create the random bot, replace this with your own bot
-            RandomBot bot = new RandomBot(serverStuff);
+            HonoursBot bot = new HonoursBot(serverStuff);
 
             //now kick it all off by running the bot.
             bot.run();

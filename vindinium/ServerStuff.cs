@@ -29,7 +29,7 @@ namespace vindinium
         public string errorText { get; private set; }
         private string serverURL;
 
-        public Tile[][] board { get; private set; }
+        public Board board { get; private set; }
 
         //if training mode is false, turns and map are ignored8
         public ServerStuff(string key, bool trainingMode, uint turns, string serverURL, string map)
@@ -136,16 +136,14 @@ namespace vindinium
 
         private void createBoard(int size, string data)
         {
-            //check to see if the board list is already created, if it is, we just overwrite its values
-            if (board == null || board.Length != size)
-            {
-                board = new Tile[size][];
 
-                //need to initialize the lists within the list
-                for (int i = 0; i < size; i++)
-                {
-                    board[i] = new Tile[size];
-                }
+            Console.WriteLine(data);
+            //check to see if the board list is already created, if it is, we just overwrite its values
+            if (board == null || board.Width != size)
+            {
+                board = new Board(new Tile[size,size]);
+
+ 
             }
 
             //convert the string to the List<List<Tile>>
@@ -158,49 +156,49 @@ namespace vindinium
                 switch (charData[i])
                 {
                     case '#':
-                        board[x][y] = Tile.IMPASSABLE_WOOD;
+                        board[x,y] = Tile.IMPASSABLE_WOOD;
                         break;
                     case ' ':
-                        board[x][y] = Tile.FREE;
+                        board[x,y]= Tile.FREE;
                         break;
                     case '@':
                         switch (charData[i + 1])
                         {
                             case '1':
-                                board[x][y] = Tile.HERO_1;
+                                board[x,y] = Tile.HERO_1;
                                 break;
                             case '2':
-                                board[x][y] = Tile.HERO_2;
+                                board[x,y] = Tile.HERO_2;
                                 break;
                             case '3':
-                                board[x][y] = Tile.HERO_3;
+                                board[x,y]= Tile.HERO_3;
                                 break;
                             case '4':
-                                board[x][y] = Tile.HERO_4;
+                                board[x,y] = Tile.HERO_4;
                                 break;
 
                         }
                         break;
                     case '[':
-                        board[x][y] = Tile.TAVERN;
+                        board[x,y] = Tile.TAVERN;
                         break;
                     case '$':
                         switch (charData[i + 1])
                         {
                             case '-':
-                                board[x][y] = Tile.GOLD_MINE_NEUTRAL;
+                                board[x,y] = Tile.GOLD_MINE_NEUTRAL;
                                 break;
                             case '1':
-                                board[x][y] = Tile.GOLD_MINE_1;
+                                board[x,y] = Tile.GOLD_MINE_1;
                                 break;
                             case '2':
-                                board[x][y] = Tile.GOLD_MINE_2;
+                                board[x,y] = Tile.GOLD_MINE_2;
                                 break;
                             case '3':
-                                board[x][y] = Tile.GOLD_MINE_3;
+                                board[x,y] = Tile.GOLD_MINE_3;
                                 break;
                             case '4':
-                                board[x][y] = Tile.GOLD_MINE_4;
+                                board[x,y] = Tile.GOLD_MINE_4;
                                 break;
                         }
                         break;

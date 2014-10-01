@@ -42,7 +42,7 @@ namespace vindinium
         internal List<Hero> heroes;
 
         [DataMember]
-        internal Board board;
+        internal ABoard board;
 
         [DataMember]
         internal bool finished;
@@ -87,10 +87,16 @@ namespace vindinium
 
         [DataMember]
         internal int y;
+
+
+        public int ManhattanDistance(Pos that)
+        {
+            return Math.Abs(this.x - that.x) + Math.Abs(this.y - that.y);
+        }
     }
 
     [DataContract]
-    class Board
+    class ABoard
     {
         [DataMember]
         internal int size;

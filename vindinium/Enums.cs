@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace vindinium
 {
-    enum Tile
+    public enum Tile
     {
         IMPASSABLE_WOOD,
         FREE,
@@ -22,7 +22,7 @@ namespace vindinium
         GOLD_MINE_4
     }
 
-    class Direction
+    public class Direction
     {
         public const string Stay = "Stay";
         public const string North = "North";
