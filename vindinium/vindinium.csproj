@@ -52,6 +52,7 @@
     <Compile Include="ServerStuff.cs" />
     <Compile Include="HonoursBot.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="PriorityQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,18 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Mischel.Collections;
 
+
+// Ik weet nu wat er fout gaat
 namespace vindinium
 {
     class Board
     {
-        private Tile[,] board;
+		private Node[,] board;
 
-        public Board(Tile[,] board)
+		public Board(Node[,] board)
         {
             this.board = board;
         }
 
-        public Tile this[int i, int j]
+		public Node this[int i, int j]
         {
             get
             {
@@ -24,7 +28,7 @@ namespace vindinium
             }
         }
 
-        public Tile this[Pos p]
+		public Node this[Pos p]
         {
             get
             {
@@ -51,155 +55,196 @@ namespace vindinium
 
         // http://buildnewgames.com/astar/
         // return positions for a certain tile:
-        public Pos[] PositionsOf(Tile t)
+//        public Pos[] PositionsOf(Tile t)
+//        {
+//            List<Pos> tilePositions = new List<Pos>();
+//
+//            for(int x = 0; x < board.GetLength(0); x++)
+//            {
+//                for (int y = 0; y < board.GetLength(1); y++)
+//                {
+//                    if (board[x,y] == t)
+//                    {
+//                        tilePositions.Add(new Pos(x,y));
+//                    }
+//                }
+//            }
+//
+//            return tilePositions.ToArray();
+//        }
+//
+  
+
+        public bool CanWalkHere(int x, int y)
         {
-            List<Pos> tilePositions = new List<Pos>();
-
-            for(int x = 0; x < board.GetLength(0); x++)
-            {
-                for (int y = 0; y < board.GetLength(1); y++)
-                {
-                    if (board[x,y] == t)
-                    {
-                        tilePositions.Add(new Pos() { x=x, y=y });
-                    }
-                }
-            }
-
-            return tilePositions.ToArray();
-        }
-
-        public Pos[] Neighbours (Pos p)
-        {
-            var x = p.y;
-            var y = p.y;
-            var N = p.y - 1;
-            var S = p.y + 1;
-            var E = p.x + 1;
-            var W = p.x - 1;
-
-            var myN = N > -1 && CanWalkHere(new Pos(){x =x, y=N});
-            var myS = S < Height && CanWalkHere(new Pos(){x=x, y=S});
-            var myE = E < Width && CanWalkHere(new Pos(){x=E, y=y});
-            var myW = W > -1 && CanWalkHere(new Pos(){x=W, y=y});
-
-            var results = new List<Pos>();
-            if (myN)
-            {
-                results.Add(new Pos() { x=x, y=N });
-            }
-            if (myE)
-            {
-                results.Add(new Pos() {x=E, y=y});
-            }
-            if (myS)
-            {
-                results.Add(new Pos() { x=x, y=S });
-            }
-            if (myW)
-            {
-                results.Add(new Pos() { x=W, y=y });
-            }
-
-            return results.ToArray();
+			// todo impassable
+			return x >= 0 && y >= 0 && x < Width && y < Height && board[x,y].Tile != Tile.IMPASSABLE_WOOD;
         }
 
 
-        public bool CanWalkHere(Pos p)
+        public bool CanWalkHere(Pos n)
         {
-            return p.x <= Width && p.y <= Height && this[p] !=
-                Tile.IMPASSABLE_WOOD;
+            return CanWalkHere(n.x, n.y);
         }
 
-
-
-
-        public Pos[] FindPath(Pos start, Pos goal)
+		public int Heuristic(Node goal, Node next)
         {
-            var myPathStart = new Node(this, null, start);
-            var myPathEnd = new Node(this, null, goal);
+            return goal.ManhattanDistance(next);
+        }
+
+        /// <summary>
+        /// return a cost of a node..  
+        /// For now this is just 1. But it could be different for different
+        /// situations
+        /// the cost determines if the path-finding algorithm avoids this
+        /// location.
+        /// 
+        /// One could for example avoid goblins when HP is low..
+        /// </summary>
+        /// <param name="n">N.</param>
+		public int Cost(Node n)
+		{
+			return 1;
+        }
+                    
+		public IEnumerable<Node> PathFind(Node start, Node goal)
+		{
+			var frontier = new Mischel.Collections.PriorityQueue<Node, int>();
+			frontier.Enqueue(start,0);
+			start.Opened = true;
+
+			while (frontier.Count() > 0)
+			{
+				var current = frontier.Dequeue().Value;
+				if (current == goal)
+				{
+					return backTrace(goal);
+				}
+
+				foreach (var next in Neighbours(current))
+				{
+					var newCost = current.CostSoFar + Cost(next);
+					if (!next.Opened || newCost < next.CostSoFar)
+					{
+						next.CostSoFar = newCost;
+						next.Opened = true;
+						var priority = newCost + goal.ManhattanDistance(next);
+						frontier.Enqueue(next,priority);
+						next.Parent = current;
+					}
+				}
+			}
+			return null;
+		}
 
 
+		public IEnumerable<Node> Neighbours(Node p)
+        {
+			var x = p.X;
+			var y = p.Y;
+			var N = p.Y - 1;
+			var S = p.Y + 1;
+			var E = p.X + 1;
+			var W = p.X - 1;
+            
+            
 
-            List<Node> closed = new List<Node>();
-            List<Node> open = new List<Node>(new[]{myPathStart});
-
-            List<Pos> result = new List<Pos>();
-
-            Pos[] myNeighbours = null;
-            Node myNode = null;
-            Node myPath = null;
-            int length, max, min, i, j;
-            int size = Width * Height;
-
-            bool[] aStar = new bool[size];
-
-            while ((length = open.Count) > 0)
+			if (CanWalkHere(x, N))
             {
-                max = size;
-                min = -1;
-
-                for (i = 0; i < length; i++)
-                {
-                    if (open[i].F < max)
-                    {
-                        max = open[i].F;
-                        min = i;
-                    }
-                }
-                myNode = open[min];
-                open.RemoveAt(min);
-
-                if (myNode.Value == myPathEnd.Value)
-                {
-                    closed.Add(myNode);
-                    myPath = closed[closed.Count - 1];
-                    do
-                    {
-                        result.Add(myPath.Pos);
-                    } while ((myPath = myPath.Parent) != null);
-                } else {
-                    myNeighbours = Neighbours(myNode.Pos);
-                    for (i = 0, j = myNeighbours.Length; i < j; i++)
-                    {
-                        myPath = new Node(this, myNode, myNeighbours[i]);
-                        if (!aStar[myPath.Value])
-                        {
-                            myPath.G = myNode.G +
-                                myNeighbours[i].ManhattanDistance(myNode.Pos);
-
-                            myPath.F = myNeighbours[i]
-                                .ManhattanDistance(myPathEnd.Pos);
-
-                            open.Add(myPath);
-                            aStar[myPath.Value] = true;
-
-                        }
-                    }
-                    closed.Add(myNode);
-                }
-
+				yield return this[x,N];
             }
-            return result.ToArray();
-          
-   }
-   
-    class Node
-    {
-        public Node Parent;
-        public Pos Pos;
-        public int Value, F, G;
-        public Node(Board b, Node parent, Pos p)
+			if ( CanWalkHere(E, y))
+            {
+				yield return this[E,y];
+            }
+			if (CanWalkHere(x, S))
+            {
+				yield return this[x,S];
+            }
+			if (CanWalkHere(W, y))
+            {
+				yield return this[W,y];
+            }
+
+        }
+
+		private static List<Node> backTrace(Node n)
         {
-            this.Parent = parent;
-            this.Pos = p;
-            this.Value = p.x + (p.y * b.Width);
-            this.F = 0;
-            this.G = 0;
+			List<Node> result = new List<Node>();
+            result.Add(n);
+            while (n.Parent != null)
+            {
+                n = n.Parent;
+                result.Add(n);
+            }
+
+
+            result.Reverse();
+            return result;
         }
     }
-}
-       
+
+
+	public class Node : IComparable<Node>
+	{
+		public Tile Tile;
+		public int X;
+		public int Y;
+		public Node Parent;
+		public int CostSoFar = 0;
+		public int F,G,H;
+		public bool Opened = false;
+		public bool Closed = false;
+
+
+		public Node(Tile tile, int x, int y)
+		{
+			this.Tile = tile;
+			this.X = x;
+			this.Y = y;
+		}
+
+		public int CompareTo(Node that)
+		{
+			return this.F - that.F;
+		}
+			
+		public int ManhattanDistance(Node that)
+		{
+			return Math.Abs(this.X - that.X) + Math.Abs(this.Y - that.Y);
+		}
+
+//		public string MoveTo(Pos n)
+//		{
+//			if (x - n.x == 0)
+//			{
+//				if (y - n.y < 0)
+//					return Direction.East;
+//				else if (y - n.y > 0)
+//					return Direction.West;
+//				else
+//					return Direction.Stay;
+//			}
+//			else if (y - n.y == 0)
+//			{
+//				if (x - n.x < 0)
+//					return Direction.South;
+//				else if (x - n.x > 0)
+//					return Direction.North;
+//				else
+//					return Direction.Stay;
+//			}
+//			return Direction.Stay;
+//		}
+
+	}
+	public class NodeComparer : IComparer<Node>
+	{
+		public int Compare(Node a, Node b)
+		{
+			return a.F - b.F;
+		}
+	}  
 }
 
 

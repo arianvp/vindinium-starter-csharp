@@ -26,6 +26,7 @@ namespace vindinium
             //create the random bot, replace this with your own bot
             HonoursBot bot = new HonoursBot(serverStuff);
 
+         
             //now kick it all off by running the bot.
             bot.run();
 

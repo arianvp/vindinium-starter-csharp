@@ -137,11 +137,10 @@ namespace vindinium
         private void createBoard(int size, string data)
         {
 
-            Console.WriteLine(data);
             //check to see if the board list is already created, if it is, we just overwrite its values
             if (board == null || board.Width != size)
             {
-                board = new Board(new Tile[size,size]);
+				board = new Board(new Node[size,size]);
 
  
             }
@@ -156,49 +155,50 @@ namespace vindinium
                 switch (charData[i])
                 {
                     case '#':
-                        board[x,y] = Tile.IMPASSABLE_WOOD;
+					board[x,y] = new Node(Tile.IMPASSABLE_WOOD,x,y);
                         break;
                     case ' ':
-                        board[x,y]= Tile.FREE;
+					board[x,y]= new Node(Tile.FREE,x,y);
                         break;
                     case '@':
                         switch (charData[i + 1])
                         {
                             case '1':
-                                board[x,y] = Tile.HERO_1;
+						board[x, y] = new Node(Tile.HERO_1,x,y);
                                 break;
                             case '2':
-                                board[x,y] = Tile.HERO_2;
+								board[x, y] = new Node(Tile.HERO_2,x,y);
                                 break;
                             case '3':
-                                board[x,y]= Tile.HERO_3;
+						board[x, y] = new Node(Tile.HERO_3,x,y);
                                 break;
                             case '4':
-                                board[x,y] = Tile.HERO_4;
+						board[x, y] = new Node(Tile.HERO_4,x,y);
                                 break;
 
                         }
                         break;
                     case '[':
-                        board[x,y] = Tile.TAVERN;
+					board[x, y] = new Node(Tile.TAVERN,x,y);
                         break;
                     case '$':
+
                         switch (charData[i + 1])
                         {
                             case '-':
-                                board[x,y] = Tile.GOLD_MINE_NEUTRAL;
+						board[x,y] = new Node(Tile.GOLD_MINE_NEUTRAL,x,y);
                                 break;
                             case '1':
-                                board[x,y] = Tile.GOLD_MINE_1;
+						board[x,y] = new Node(Tile.GOLD_MINE_1,x,y);
                                 break;
                             case '2':
-                                board[x,y] = Tile.GOLD_MINE_2;
+						board[x,y] = new Node(Tile.GOLD_MINE_2,x,y);
                                 break;
                             case '3':
-                                board[x,y] = Tile.GOLD_MINE_3;
+						board[x,y] = new Node(Tile.GOLD_MINE_3,x,y);
                                 break;
                             case '4':
-                                board[x,y] = Tile.GOLD_MINE_4;
+						board[x,y] = new Node(Tile.GOLD_MINE_4,x,y);;
                                 break;
                         }
                         break;

@@ -1,0 +1,5 @@
+/home/arian/Projects/vindinium-starter-csharp/vindinium/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/arian/Projects/vindinium-starter-csharp/vindinium/bin/Debug/client.exe.mdb
+/home/arian/Projects/vindinium-starter-csharp/vindinium/bin/Debug/client.exe
+/home/arian/Projects/vindinium-starter-csharp/vindinium/obj/Debug/client.exe
+/home/arian/Projects/vindinium-starter-csharp/vindinium/obj/Debug/client.exe.mdb

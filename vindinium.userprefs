@@ -1,22 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="vindinium/HonoursBot.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="vindinium/Board.cs">
     <Files>
-      <File FileName="vindinium/Client.cs" Line="16" Column="24" />
-      <File FileName="vindinium/ServerStuff.cs" Line="157" Column="30" />
-      <File FileName="vindinium/DataContracts.cs" Line="11" Column="6" />
-      <File FileName="vindinium/RandomBot.cs" Line="24" Column="35" />
-      <File FileName="vindinium/HonoursBot.cs" Line="35" Column="17" />
-      <File FileName="vindinium/Board.cs" Line="117" Column="30" />
-      <File FileName="HonoursBot/Board.cs" Line="40" Column="22" />
-      <File FileName="vindinium/Enums.cs" Line="25" Column="12" />
+      <File FileName="vindinium/ServerStuff.cs" Line="150" Column="23" />
+      <File FileName="vindinium/DataContracts.cs" Line="111" Column="1" />
+      <File FileName="vindinium/RandomBot.cs" Line="56" Column="1" />
+      <File FileName="vindinium/HonoursBot.cs" Line="29" Column="37" />
+      <File FileName="vindinium/Enums.cs" Line="11" Column="24" />
+      <File FileName="vindinium/Client.cs" Line="29" Column="10" />
+      <File FileName="vindinium/Board.cs" Line="159" Column="13" />
+      <File FileName="vindinium/PriorityQueue.cs" Line="146" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="HonoursBot" expanded="True" />
           <Node name="vindinium" expanded="True">
-            <Node name="HonoursBot.cs" selected="True" />
+            <Node name="Board.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -24,14 +23,31 @@
         <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
+        <State>
+          <Value>frontier</Value>
+          <Value>k</Value>
+          <Value>start</Value>
+          <Value>goal</Value>
+          <Value>frontier</Value>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/arian/Projects/vindinium-starter-csharp/vindinium/HonoursBot.cs" line="67" column="1" />
+      <Breakpoint file="/home/arian/Projects/vindinium-starter-csharp/vindinium/Board.cs" line="160" column="1" />
+      <Breakpoint file="/home/arian/Projects/vindinium-starter-csharp/vindinium/Board.cs" line="158" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="vindinium/Board.cs" line="171" offsetX="550" offsetY="2988" expression="myNeighbours" liveUpdate="False" />
+    <Watch file="vindinium/Board.cs" line="163" offsetX="518" offsetY="2898" expression="frontier.Dequeue().Value" liveUpdate="False" />
+    <Watch file="vindinium/Board.cs" line="178" offsetX="606" offsetY="3168" expression="next" liveUpdate="False" />
+    <Watch file="vindinium/Board.cs" line="164" offsetX="582" offsetY="2916" expression="goal" liveUpdate="False" />
+    <Watch file="vindinium/Board.cs" line="156" offsetX="534" offsetY="2772" expression="Mischel.Collections.PriorityQueue" liveUpdate="False" />
+    <Watch file="vindinium/PriorityQueue.cs" line="131" offsetX="838" offsetY="2232" expression="items" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
   <MonoDevelop.Ide.ItemProperties.vindinium>
     <MonoDevelop.Ide.CustomExecutionModes>
       <Data Name="Default (Custom)" Id="2e69d3e2-c357-4c03-abcd-7bb7fd02e7cd" ModeId="Default">

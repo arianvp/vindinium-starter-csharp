@@ -82,6 +82,12 @@ namespace vindinium
     [DataContract]
     class Pos
     {
+        public Pos ()
+        {
+        }
+
+
+
         [DataMember]
         internal int x;
 
@@ -89,10 +95,10 @@ namespace vindinium
         internal int y;
 
 
-        public int ManhattanDistance(Pos that)
-        {
-            return Math.Abs(this.x - that.x) + Math.Abs(this.y - that.y);
-        }
+
+
+
+
     }
 
     [DataContract]
